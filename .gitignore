@@ -4,7 +4,7 @@
 *.war
 *.ear
 .gradle/
-grade/
+gradle/
 build/
 out/
 *.iml
