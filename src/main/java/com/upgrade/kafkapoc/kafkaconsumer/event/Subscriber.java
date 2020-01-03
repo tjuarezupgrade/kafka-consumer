@@ -1,5 +1,6 @@
 package com.upgrade.kafkapoc.kafkaconsumer.event;
 
+import com.upgrade.kafkapoc.kafkaconsumer.model.SpectrumMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.MessageHeaders;
@@ -11,8 +12,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class Subscriber {
 
-    @KafkaListener(topics = "${message.topic.name}", id="spectrum-consumer")
-    public void eventHandler(@Payload String message, @Headers MessageHeaders headers) {
+    @KafkaListener(
+            topics = "${message.topic.name}", id="spectrum-consumer", containerFactory = "kafkaJsonListenerContainerFactory")
+    public void eventHandler(@Payload SpectrumMessage message, @Headers MessageHeaders headers) {
+
         log.info("Message received: {}", message);
     }
 }
